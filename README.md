@@ -5,3 +5,5 @@ Praktikum 02
 ![File migration](image-1.png)
 Praktikum 03
 ![File Seeder](image-2.png)
+Praktikum 04
+![DB Facade](image-3.png)
