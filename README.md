@@ -9,3 +9,6 @@ Praktikum 04
 ![DB Facade](image-3.png)
 Praktikum 05
 ![Query Builder](image-4.png)
+Praktikum 06
+![1](image-5.png)
+
