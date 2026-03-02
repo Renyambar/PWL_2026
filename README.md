@@ -7,3 +7,5 @@ Praktikum 03
 ![File Seeder](image-2.png)
 Praktikum 04
 ![DB Facade](image-3.png)
+Praktikum 05
+![Query Builder](image-4.png)
