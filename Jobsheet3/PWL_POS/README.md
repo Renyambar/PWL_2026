@@ -21,5 +21,7 @@ Praktikum 2.1
 ![langkah 10](image-2.png)
 Praktikum 2.2
 ![langkah 1](image-3.png)
+![langkah 3](image-4.png)
+
 
 
