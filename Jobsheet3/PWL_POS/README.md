@@ -18,5 +18,6 @@ Praktikum 1
 Praktikum 2.1
 ![lankah 1-6](image.png)
 ![langkah 8](image-1.png)
+![langkah 10](image-2.png)
 Praktikum 2.2
 
