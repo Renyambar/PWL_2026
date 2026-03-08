@@ -16,6 +16,7 @@ WEEK 04
 Praktikum 1
 ![fillable](img_jb4/image.png)
 Praktikum 2.1
-![alt text](image.png)
+![lankah 1-6](image.png)
+![langkah 8](image-1.png)
 Praktikum 2.2
 
