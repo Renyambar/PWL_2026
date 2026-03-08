@@ -24,6 +24,10 @@ Praktikum 2.2
 ![langkah 3](image-4.png)
 Praktikum 2.3
 ![Retrieving Agregrate](image-5.png)
+Praktikum 2.4
+![phpMyAdmin](image-6.png)![alt text](image-8.png)
+![langkah 6](image-7.png)
+![alt text](image-9.png)
 
 
 
