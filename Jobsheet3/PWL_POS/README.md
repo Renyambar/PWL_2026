@@ -15,4 +15,7 @@ Praktikum 06
 WEEK 04
 Praktikum 1
 ![fillable](img_jb4/image.png)
+Praktikum 2.1
+![alt text](image.png)
+Praktikum 2.2
 
