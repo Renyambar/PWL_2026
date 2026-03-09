@@ -28,6 +28,8 @@ Praktikum 2.4
 ![phpMyAdmin](image-6.png)![alt text](image-8.png)
 ![langkah 6](image-7.png)
 ![alt text](image-9.png)
+Praktikum 2.5
+![phpMyAdmin](image-10.png)
 
 
 
