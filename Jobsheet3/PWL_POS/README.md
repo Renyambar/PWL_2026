@@ -30,8 +30,11 @@ Praktikum 2.4
 ![alt text](image-9.png)
 Praktikum 2.5
 ![phpMyAdmin](image-10.png)
-Praktkum 2.6
+Praktikum 2.6
 ![CRUD](image-11.png)
+Praktikum 2.7
+![tambah user](image-12.png)
+![ubah user](image-13.png)
 
 
 
