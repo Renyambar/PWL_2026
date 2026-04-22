@@ -143,7 +143,13 @@ Konfigurasi Model: Menambahkan properti $fillable pada Model di app/Models/ agar
 PHP
 protected $fillable = ['nama_kolom', 'deskripsi'];
 Hasil Screenshot Struktur Tabel / phpMyAdmin:
-![Screenshot Database](link_atau_path_gambar_kamu.png)
+![Screenshot Database](![alt text](Jobsheet5\image31.png))
+
+![alt text](Jobsheet5\image32.png)
+
+![alt text](Jobsheet5\image33.png)
+
+![alt text](Jobsheet5\image34.png)
 
 ### Jawaban Analisis & Diskusi: Jobsheet 3 (Migrasi dan Model)
 
