@@ -49,9 +49,72 @@ Hasil Screenshot Dashboard:
 3. Kesimpulan
 Proses instalasi Filament berhasil dilakukan dengan lancar. Filament menyediakan kerangka kerja yang sangat cepat untuk membangun antarmuka admin yang terintegrasi dengan ekosistem TALL stack tanpa perlu membuat views secara manual.
 
+## Laporan 2: Membuat CRUD Resource dengan Filament v4 (Jobsheet 2)
+1. Tujuan Praktikum
+Mampu membuat resource baru di Filament untuk mengelola data dari tabel/Model.
+
+Mampu mengkonfigurasi Form (Create dan Edit) menggunakan komponen Filament.
+
+Mampu mengkonfigurasi Table (List/Read) menggunakan komponen Filament.
+
+2. Langkah Kerja dan Hasil Praktikum
+Pembuatan Resource: Menghasilkan file resource berdasarkan Model yang telah dibuat sebelumnya.
+
+Bash
+php artisan make:filament-resource NamaModel
+Konfigurasi Form Input: Membuka file NamaModelResource.php dan mengatur bagian form(Form $form).
+
+PHP
+public static function form(Form $form): Form
+{
+    return $form->schema([
+        TextInput::make('nama_kolom')->required(),
+        Textarea::make('deskripsi'),
+    ]);
+}
+Konfigurasi Tabel: Mengatur bagian table(Table $table) untuk menampilkan data.
+
+PHP
+public static function table(Table $table): Table
+{
+    return $table->columns([
+        TextColumn::make('nama_kolom')->searchable()->sortable(),
+    ]);
+}
+Pengujian CRUD: Membuka dashboard admin, masuk ke menu Resource terkait, lalu melakukan uji coba tambah data (Create), lihat data (Read), edit data (Update), dan hapus data (Delete).
+
+Hasil Screenshot Halaman CRUD:
+![Screenshot Halaman List Data](![alt text](Jobsheet5\image6.png))
+
+![Screenshot Halaman Create Data](![alt text](Jobsheet5\image-1.png))
+
+![Menampilkan Data User](Jobsheet5\image-2.png)
+
+### Jawaban Analisis & Diskusi: Jobsheet 2 (CRUD Resource)
+
+1. **Mengapa Filament dapat membuat CRUD tanpa banyak coding?**
+   Karena Filament bekerja dengan memanfaatkan Model dan sistem ORM bawaan Laravel (Eloquent). Melalui satu perintah `make:filament-resource`, Filament otomatis menghasilkan class PHP terstruktur yang sudah memiliki metode tersembunyi untuk mengeksekusi operasi database (Create, Read, Update, Delete) tanpa mengharuskan developer menulis *query* atau *controller* manual.
+
+2. **Apa perbedaan Form Schema dan Table Schema?**
+   - **Form Schema:** Berfungsi untuk mengatur struktur elemen input pada halaman Create dan Edit. Komponennya berupa input field seperti `TextInput`, `Select`, atau `FileUpload`.
+   - **Table Schema:** Berfungsi untuk mengatur tampilan antarmuka saat menampilkan daftar data di halaman Read/List. Komponennya berupa kolom tampilan seperti `TextColumn` atau `ImageColumn`.
+
+3. **Bagaimana jika kita ingin menambahkan validasi email unik?**
+   Pada pengaturan *Form Schema* di dalam Resource, kita dapat menyisipkan method `->unique()`. Contoh penulisannya: 
+   `TextInput::make('email')->email()->unique(ignoreRecord: true)`
+   *(Catatan: `ignoreRecord: true` penting agar saat proses Edit data, email yang sama milik user tersebut tidak dianggap duplikat oleh sistem).*
+
+4. **Mengapa password tidak perlu kita hash manual?**
+   Laravel versi terbaru sudah memiliki mekanisme otomatis melalui *Casting*. Pada Model User Laravel, biasanya sudah terdapat definisi `protected function casts()` yang mengubah format `'password' => 'hashed'`. Karena Filament menyimpan form secara langsung ke Model, sistem otomatis mengubah input teks biasa (plain text) menjadi kode *Bcrypt* sebelum masuk ke database.
+
+---
+
+3. Kesimpulan
+Filament membuat proses pembuatan fitur CRUD menjadi sangat efisien. Konfigurasi formulir (form) dan tabel (table) dilakukan menggunakan metode fluent API di PHP, sehingga menghemat banyak waktu dibandingkan harus menulis kode HTML, form validation, dan controller secara manual.
 
 
-## Laporan 2: Migrasi dan Model (Jobsheet 3)
+
+## Laporan 3: Migrasi dan Model (Jobsheet 3)
 
 1. Tujuan Praktikum
 Mampu merancang struktur database menggunakan skema Migrasi Laravel.
@@ -103,62 +166,3 @@ Hasil Screenshot Struktur Tabel / phpMyAdmin:
 Penggunaan fitur Migration mempermudah pelacakan perubahan struktur database (version control), sementara Model Eloquent mempermudah interaksi dengan database MySQL menggunakan pendekatan Object-Oriented. Keduanya adalah syarat wajib sebelum membuat CRUD Resource.
 
 
-## Laporan 3: Membuat CRUD Resource dengan Filament v4 (Jobsheet 2)
-1. Tujuan Praktikum
-Mampu membuat resource baru di Filament untuk mengelola data dari tabel/Model.
-
-Mampu mengkonfigurasi Form (Create dan Edit) menggunakan komponen Filament.
-
-Mampu mengkonfigurasi Table (List/Read) menggunakan komponen Filament.
-
-2. Langkah Kerja dan Hasil Praktikum
-Pembuatan Resource: Menghasilkan file resource berdasarkan Model yang telah dibuat sebelumnya.
-
-Bash
-php artisan make:filament-resource NamaModel
-Konfigurasi Form Input: Membuka file NamaModelResource.php dan mengatur bagian form(Form $form).
-
-PHP
-public static function form(Form $form): Form
-{
-    return $form->schema([
-        TextInput::make('nama_kolom')->required(),
-        Textarea::make('deskripsi'),
-    ]);
-}
-Konfigurasi Tabel: Mengatur bagian table(Table $table) untuk menampilkan data.
-
-PHP
-public static function table(Table $table): Table
-{
-    return $table->columns([
-        TextColumn::make('nama_kolom')->searchable()->sortable(),
-    ]);
-}
-Pengujian CRUD: Membuka dashboard admin, masuk ke menu Resource terkait, lalu melakukan uji coba tambah data (Create), lihat data (Read), edit data (Update), dan hapus data (Delete).
-
-Hasil Screenshot Halaman CRUD:
-![Screenshot Halaman List Data](link_atau_path_gambar_kamu.png)
-![Screenshot Halaman Create Data](link_atau_path_gambar_kamu.png)
-
-### Jawaban Analisis & Diskusi: Jobsheet 2 (CRUD Resource)
-
-1. **Mengapa Filament dapat membuat CRUD tanpa banyak coding?**
-   Karena Filament bekerja dengan memanfaatkan Model dan sistem ORM bawaan Laravel (Eloquent). Melalui satu perintah `make:filament-resource`, Filament otomatis menghasilkan class PHP terstruktur yang sudah memiliki metode tersembunyi untuk mengeksekusi operasi database (Create, Read, Update, Delete) tanpa mengharuskan developer menulis *query* atau *controller* manual.
-
-2. **Apa perbedaan Form Schema dan Table Schema?**
-   - **Form Schema:** Berfungsi untuk mengatur struktur elemen input pada halaman Create dan Edit. Komponennya berupa input field seperti `TextInput`, `Select`, atau `FileUpload`.
-   - **Table Schema:** Berfungsi untuk mengatur tampilan antarmuka saat menampilkan daftar data di halaman Read/List. Komponennya berupa kolom tampilan seperti `TextColumn` atau `ImageColumn`.
-
-3. **Bagaimana jika kita ingin menambahkan validasi email unik?**
-   Pada pengaturan *Form Schema* di dalam Resource, kita dapat menyisipkan method `->unique()`. Contoh penulisannya: 
-   `TextInput::make('email')->email()->unique(ignoreRecord: true)`
-   *(Catatan: `ignoreRecord: true` penting agar saat proses Edit data, email yang sama milik user tersebut tidak dianggap duplikat oleh sistem).*
-
-4. **Mengapa password tidak perlu kita hash manual?**
-   Laravel versi terbaru sudah memiliki mekanisme otomatis melalui *Casting*. Pada Model User Laravel, biasanya sudah terdapat definisi `protected function casts()` yang mengubah format `'password' => 'hashed'`. Karena Filament menyimpan form secara langsung ke Model, sistem otomatis mengubah input teks biasa (plain text) menjadi kode *Bcrypt* sebelum masuk ke database.
-
----
-
-3. Kesimpulan
-Filament membuat proses pembuatan fitur CRUD menjadi sangat efisien. Konfigurasi formulir (form) dan tabel (table) dilakukan menggunakan metode fluent API di PHP, sehingga menghemat banyak waktu dibandingkan harus menulis kode HTML, form validation, dan controller secara manual.
