@@ -57,4 +57,31 @@ Redirect: Menambahkan fungsi getRedirectUrl() pada CreatePost.php dan EditPost.p
 Praktikum ini berhasil mengimplementasikan sistem manajemen postingan yang kompleks menggunakan Filament. Mahasiswa telah menguasai penggunaan elemen formulir tingkat lanjut (seperti editor teks dan pengunggah file), manajemen relasi database dalam UI admin, serta konfigurasi teknis penyimpanan file di Laravel.
 
 
+## Laporan Jobsheet 2 – Custom Layout Form dengan Section & Group di Filament 
+
+# A. Langkah-Langkah Praktikum 
+
+Pengaturan Grid Dasar: Mengatur form dasar agar tampil dalam grid dengan menambahkan ->columns(3) pada method form schema utama.
+![alt text](image-5.png)
+
+Penerapan Section: Mengelompokkan field "Post Details" ke dalam sebuah Section yang dilengkapi dengan deskripsi dan ikon, lalu field diset untuk tampil dalam 2 kolom.
+![alt text](image-7.png)
+
+Section Terpisah: Memisahkan area upload gambar ke dalam Section::make('Image Upload') dan field tambahan ke dalam Section::make('Meta').
+
+Kombinasi Group dan Section: Membuat layout secara horizontal dimana bagian kiri difokuskan untuk field input teks utama yang mengambil 2/3 porsi layar menggunakan Group::make([...])->columnSpan(2). Bagian kanan difokuskan untuk upload gambar dan meta data mengambil 1/3 porsi layar dengan Group::make([...])->columnSpan(1).
+
+# D. Analisis & Diskusi
+1. Mengapa layout form penting dalam aplikasi admin?
+Jawaban: Layout form yang terstruktur sangat penting untuk meningkatkan kenyamanan (User Experience), mempermudah alur kerja saat admin mengisi data yang banyak, mengurangi risiko kebingungan/kesalahan input, dan menyajikan hierarki informasi secara logis dan estetis.
+
+2. Apa perbedaan Section dan Group?
+Jawaban: Section adalah pembungkus komponen yang bersifat visual; ia merender antarmuka kotak (box) di layar dan bisa diberi elemen UI seperti judul, teks deskripsi, dan ikon. Sedangkan Group bersifat struktural (non-visual); digunakan semata-mata untuk mengikat beberapa komponen menjadi satu kelompok logika sehingga pengaturan ukuran grid (seperti columnSpan) bisa diterapkan ke sekumpulan field sekaligus tanpa harus membuat tampilan kotak di layar.
+
+3. Kapan kita menggunakan columnSpanFull()?
+Jawaban: Method columnSpanFull() digunakan ketika ada komponen input yang membutuhkan ruang yang sangat luas (memakan seluruh lebar layar/container), misalnya untuk editor teks kaya (Rich Text Editor / Markdown Editor) pada bagian isi artikel (body).
+
+4. Apa keuntungan sistem grid 12 kolom?
+Jawaban: Sistem grid 12 kolom sangat fleksibel dan diadaptasi dari framework seperti Tailwind. Angka 12 dapat dibagi rata ke dalam banyak skenario, misalnya dibagi 2 (lebar 6), dibagi 3 (lebar 4), dibagi 4 (lebar 3), atau untuk proporsi asimetris yang rapi seperti 8 dan 4 (perbandingan 2/3 dan 1/3 layout).
+
 
