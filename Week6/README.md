@@ -87,4 +87,28 @@ Jawaban: Method columnSpanFull() digunakan ketika ada komponen input yang membut
 4. Apa keuntungan sistem grid 12 kolom?
 Jawaban: Sistem grid 12 kolom sangat fleksibel dan diadaptasi dari framework seperti Tailwind. Angka 12 dapat dibagi rata ke dalam banyak skenario, misalnya dibagi 2 (lebar 6), dibagi 3 (lebar 4), dibagi 4 (lebar 3), atau untuk proporsi asimetris yang rapi seperti 8 dan 4 (perbandingan 2/3 dan 1/3 layout).
 
+## LAPORAN JOBSHET 3 - Implementasi Form Validation pada Filament 
 
+# A. Latihan Praktikum
+Tugas praktikum menginstruksikan penambahan validasi berupa: Title minimal 5 karakter, Slug unik dan minimal 3 karakter, Category wajib dipilih, dan Image wajib diunggah. Selain itu, diminta untuk membuat custom message minimal untuk dua field.
+![alt text](image-10.png)
+
+
+
+# B. Analisis & Diskusi
+Berikut adalah penjelasan untuk pertanyaan pada bagian Analisis & Diskusi:
+1. Mengapa validasi penting pada admin panel? 
+Jawaban: Validasi sangat penting untuk menjaga integritas, keamanan, dan kualitas data yang masuk ke dalam database. Sistem menjadi terlindungi dari data yang tidak lengkap, berformat salah, atau duplikat yang berpotensi menimbulkan bug pada aplikasi saat diakses oleh pengguna.
+
+2. Apa perbedaan validasi client-side dan server-side? 
+Jawaban: Validasi client-side dilakukan pada sisi browser pengguna menggunakan HTML atau JavaScript sebelum data dikirim ke server. Ini memberikan respon cepat kepada pengguna, namun cukup mudah dimanipulasi atau dilewati. Validasi server-side diproses oleh backend (Laravel/Filament) setelah data diterima. Ini merupakan lapisan keamanan utama yang mutlak diperlukan untuk menjamin data benar-benar valid sebelum diproses ke database.
+
+3. Mengapa unique otomatis bekerja saat edit data? 
+Jawaban: Komponen form dalam Filament dirancang terintegrasi erat dengan Resource record aktif. Saat berada di mode edit data, metode unique secara cerdas mengecualikan ID record tersebut. Sehingga ketika record yang sama disimpan tanpa adanya perubahan slug, ia tidak akan dianggap melanggar aturan duplikasi miliknya sendiri.
+
+
+4. Kapan kita perlu menggunakan rules array dibanding string? 
+Jawaban: Format array lebih ideal digunakan apabila aturan validasi yang ditulis sangat banyak sehingga kode akan lebih mudah dibaca dan diatur jika ditulis menjadi beberapa baris. Format array juga harus digunakan jika aturan yang dipakai melibatkan validasi custom yang berbentuk object class dari Laravel (misal kelas Rule tingkat lanjut). Sebaliknya, format string sudah cukup untuk sekumpulan aturan dasar yang pendek.
+
+# C. Kesimpulan
+Pada pertemuan ini mahasiswa telah mempelajari implementasi form validation pada Filament. Fitur ini memanfaatkan kemampuan integrasi secara langsung dengan validasi bawaan Laravel. Melalui metode seperti required(), pengujian multiple validation, hingga penerapan validasi unik (unique), administrator panel dapat diperkuat. Penerapan kustomisasi pesan error (menggunakan validationMessages()) juga memastikan respons sistem saat terjadi input yang tidak valid menjadi jauh lebih mudah dipahami oleh pengguna, meningkatkan pengalaman interaksi di dalam sistem.

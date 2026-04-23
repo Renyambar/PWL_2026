@@ -30,12 +30,28 @@ class PostForm
                 ->schema([
                     //grouping fields into 2 columns
                     Group::make([
-                        TextInput::make("title"),
-                        TextInput::make("slug"),
-                        Select::make("category_id")
-                            ->relationship("category", "name")
-                            ->preload()
-                            ->searchable(),
+                        TextInput::make('title')
+                        ->required()
+                        ->rules(['min:5'])
+                        ->validationMessages([
+                            'required' => 'Judul artikel wajib diisi.',
+                            'min' => 'Judul harus memiliki panjang minimal 5 karakter.',
+                        ]),
+                        TextInput::make('slug')
+                        ->required()
+                        ->unique(ignoreRecord: true)
+                        ->rules(['min:3'])
+                        ->validationMessages([
+                            'required' => 'Slug wajib diisi.',
+                            'unique' => 'Slug ini sudah ada yang memakai, silakan buat yang lain.',
+                            'min' => 'Slug harus terdiri dari minimal 3 karakter.',
+                        ]),
+                        Select::make('category_id')
+                        ->relationship('category', 'name')
+                        ->required()
+                        ->validationMessages([
+                            'required' => 'Kategori artikel wajib dipilih.',
+                        ]),
                         ColorPicker::make("color"),
                     ])->columns(2),
 
@@ -48,9 +64,13 @@ class PostForm
                     //section 2 - image
                     Section::make("Image Upload")
                     ->schema([
-                        FileUpload::make("image")
-                        ->disk("public")
-                        ->directory("posts"),
+                        FileUpload::make('image')
+                        ->disk('public')
+                        ->directory('posts')
+                        ->required()
+                        ->validationMessages([
+                            'required' => 'Gambar sampul wajib diunggah terlebih dahulu.',
+                        ]),
                     ]),
 
                     //section 3 - meta
@@ -60,7 +80,7 @@ class PostForm
                             Checkbox::make("published"),
                             DateTimePicker::make("published_at"),
                         ]),
-                    ])->columnSpan(1)
+                ])->columnSpan(1),
 
             ])->columns(3);
     }
