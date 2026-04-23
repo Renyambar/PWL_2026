@@ -129,6 +129,92 @@ Keuntungannya adalah dapat menampilkan status boolean menjadi representasi visua
 # E. Kesimpulan
 Pada pertemuan ini, implementasi Info List telah berhasil mengubah View Page menjadi display data yang profesional dan bersifat read-only. Dengan menggunakan elemen seperti TextEntry, ImageEntry, dan IconEntry, serta melakukan formatting data (color, badge, date), tampilan halaman detail produk menjadi jauh lebih rapi dan terstruktur dibandingkan menggunakan form input biasa.
 
+## Laporan Jobsheet 3 – Implementasi Tabs pada Info List di Filament
+
+# A. Pendahuluan
+Praktikum ini bertujuan untuk mengimplementasikan komponen Tabs pada Info List dalam Framework Filament. Jika pada pertemuan sebelumnya kita menggunakan Section yang menampilkan semua data sekaligus dan menyebabkan scroll panjang, penggunaan Tabs membagi informasi menjadi beberapa kategori yang dapat diakses dengan klik, sehingga tampilan halaman View menjadi lebih ringkas dan user-friendly.
+# B. Implementasi Kode & Penyelesaian Latihan Praktikum
+Sesuai dengan instruksi modul dan latihan praktikum, struktur Section pada ProductInfolist.php telah diubah menjadi Tabs. Kode berikut merupakan implementasi lengkap yang sudah mengakomodasi seluruh instruksi latihan (menambahkan badge dinamis, warna badge berbeda, orientasi vertical, dan icon berbeda tiap tab):
+use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\IconEntry;
+
+Tabs::make('Product Tabs')
+    ->vertical() // Latihan 3: Mengubah tampilan menjadi vertical
+    ->tabs([
+        // Tab 1: Product Info
+        Tabs\Tab::make('Product Info')
+            ->icon('heroicon-o-academic-cap') // Latihan 4: Icon berbeda
+            ->schema([
+                TextEntry::make('name')
+                    ->label('Product Name')
+                    ->weight('bold')
+                    ->color('primary'),
+                TextEntry::make('sku')
+                    ->label('SKU')
+                    ->badge()
+                    ->color('success'),
+                TextEntry::make('description')
+                    ->label('Description'),
+            ])
+            ->columnSpanFull(),
+    ![alt text](image-8.png)
+    ![alt text](image-7.png)
+// Tab 2: Pricing & Stock
+        Tabs\Tab::make('Pricing & Stock')
+            ->icon('heroicon-o-currency-dollar') // Latihan 4: Icon berbeda
+            // Latihan 1 & 2: Badge dinamis berdasarkan stock dan warna yang berbeda
+            ->badge(fn ($record) => $record->stock)
+            ->badgeColor(fn ($record) => $record->stock < 10 ? 'danger' : 'info')
+            ->schema([
+                TextEntry::make('price')
+                    ->label('Price')
+                    ->icon('heroicon-o-currency-dollar')
+                    ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
+                TextEntry::make('stock')
+                    ->label('Stock'),
+            ]),
+    ![alt text](image-9.png)
+
+        // Tab 3: Media & Status
+        Tabs\Tab::make('Media & Status')
+            ->icon('heroicon-o-photo') // Latihan 4: Icon berbeda
+            ->schema([
+                ImageEntry::make('image')
+                    ->label('Product Image')
+                    ->disk('public'),
+                IconEntry::make('is_active')
+                    ->label('Active')
+                    ->boolean(),
+                IconEntry::make('is_featured')
+                    ->label('Featured')
+                    ->boolean(),
+            ]),
+    ])
+    ->columnSpanFull(),
+
+ ![alt text](image-10.png)
+        
+
+
+# C. Jawaban Analisis & Diskusi
+1. Kapan kita menggunakan Tabs dibanding Section?
+Tabs sangat ideal digunakan ketika data yang ditampilkan cukup banyak dan terdiri dari beberapa kategori yang logis, sehingga bila menggunakan Section akan menyebabkan pengguna harus melakukan scroll yang sangat panjang ke bawah. Tabs merapikan layout dengan menyembunyikan data yang belum diklik.
+
+2. Apa kelebihan Tabs untuk data panjang?
+Kelebihan utamanya adalah membagi informasi menjadi halaman-halaman kecil (chunking). Hal ini tidak hanya mengurangi scrolling, tetapi juga meningkatkan user experience karena pengguna bisa langsung melompat (navigasi klik) ke kategori data spesifik yang mereka butuhkan tanpa melihat tumpukan data lain, menjadikan UI terlihat lebih profesional dan bersih.
+
+3. Apakah Tabs bisa digunakan pada Form juga?
+Ya, komponen Tabs di Filament juga dapat digunakan secara penuh di dalam struktur Form, bukan hanya pada Info List. Fungsinya serupa, yaitu untuk mengelompokkan input form yang sangat panjang ke dalam beberapa tab agar lebih rapi.
+
+4. Bagaimana jika tab terlalu banyak?
+Jika tab terlalu banyak, tampilan bisa menjadi padat dan membingungkan (terutama di layar berukuran kecil). Solusinya, kita bisa mengelompokkan ulang kategori tersebut agar lebih padat, menggunakan navigasi model lain seperti submenu/dropdown, atau memisahkan data-data yang kompleks ke halaman Relation Managers tersendiri alih-alih memaksakannya di satu halaman utama.
+
+# D. Kesimpulan
+Melalui pertemuan praktikum ini, implementasi komponen Tabs pada Info List telah berhasil dilakukan. Transformasi dari Section ke Tabs memberikan perubahan signifikan pada user interface halaman View Page, menjadikannya jauh lebih ringkas, interaktif, dan terstruktur. Penambahan badge dinamis, ikon, dan orientasi vertikal juga semakin meningkatkan kualitas pengalaman pengguna.
+
+
 
 
 

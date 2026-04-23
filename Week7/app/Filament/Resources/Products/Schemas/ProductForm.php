@@ -46,6 +46,7 @@ class ProductForm
                         ->description('Upload gambar dan atur status')
                         ->schema([
                             FileUpload::make('image')
+                                ->image()
                                 ->disk('public')
                                 ->directory('products'),
                             Checkbox::make('is_active'),
