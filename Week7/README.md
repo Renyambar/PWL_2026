@@ -49,3 +49,86 @@ Tidak. Wizard form kurang cocok untuk form yang singkat (misalnya form login, re
 
 # D. Kesimpulan
 Melalui praktikum ini, telah berhasil diimplementasikan Wizard Form pada Filament. Pendekatan ini terbukti sangat efektif untuk mengelola alur input data produk e-commerce yang kompleks. Proses validasi per step dan kustomisasi aksi berjalan dengan lancar, memberikan pemahaman mengenai pembuatan antarmuka aplikasi panel admin yang profesional dan user-friendly.
+
+
+## Laporan Jobshee 2 – Implementasi Info List Element for View Page
+
+# A. Pendahuluan
+Praktikum ini bertujuan untuk mengimplementasikan Info List pada Framework Filament. Penggunaan Info List ini ditujukan untuk mengubah halaman detail (View Page) yang tadinya berbentuk form input menjadi tampilan display informasi yang bersifat read-only dan lebih profesional .
+B. Langkah-langkah Praktikum & Implementasi Kode
+Implementasi Info List dilakukan dengan menggunakan berbagai komponen Entry dari Filament untuk menyusun layout pada halaman View .
+1. Membuat Section: Product Info
+Section::make('Product Info')
+    ->schema([
+        TextEntry::make('name')
+            ->label('Product Name')
+            ->weight('bold')
+            ->color('primary'),
+        TextEntry::make('id')
+            ->label('Product ID'),
+        TextEntry::make('sku')
+            ->label('Product SKU')
+            ->badge()
+            ->color('warning'), 
+        TextEntry::make('description')
+            ->label('Product Description'),
+    ])
+    ->columnSpanFull(),
+
+    ![alt text](image-4.png)
+
+
+2. Membuat Section: Pricing & Stock
+Section::make('Pricing & Stock')
+    ->schema([
+        TextEntry::make('price')
+            ->label('Product Price')
+            ->icon('heroicon-o-currency-dollar')
+            ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')), 
+        TextEntry::make('stock')
+            ->label('Product Stock')
+            ->icon('heroicon-o-cube'), 
+    ]),
+
+    ![alt text](image-5.png)
+
+
+3. Membuat Section: Media & Status
+Section::make('Media & Status')
+    ->schema([
+        ImageEntry::make('image')
+            ->label('Product Image')
+            ->disk('public'),
+        IconEntry::make('is_active')
+            ->label('Is Active')
+            ->boolean(),
+        IconEntry::make('is_featured')
+            ->label('Is Featured')
+            ->boolean(),
+        TextEntry::make('created_at')
+            ->label('Product Creation Date')
+            ->date('d M Y')
+            ->color('info'),
+    ]),
+
+    ![alt text](image-6.png)
+
+# D. Jawaban Analisis & Diskusi
+1. Mengapa View Page tidak cocok menggunakan form input?
+Karena halaman form input membuat field menjadi editable dan kurang informatif. Halaman detail seharunya bersifat read-only untuk menampilkan informasi record dengan lebih rapi, terstruktur, dan profesional
+
+2. Apa perbedaan TextColumn dan TextEntry?
+TextColumn digunakan untuk menampilkan teks pada komponen Table (halaman List), sedangkan TextEntry digunakan untuk menampilkan teks pada komponen Info List (halaman View).
+
+3. Kapan kita menggunakan badge?
+Badge digunakan ketika kita ingin menampilkan data dalam bentuk badge yang menonjol secara visual. Ini sangat cocok untuk data pendek yang penting seperti kode SKU, status, atau kategori.
+
+4. Apa keuntungan menggunakan IconEntry untuk boolean?
+Keuntungannya adalah dapat menampilkan status boolean menjadi representasi visual icon (contohnya icon check jika true, dan icon silang jika false), sehingga informasi dapat dipahami dengan jauh lebih cepat dan intuitif.
+
+# E. Kesimpulan
+Pada pertemuan ini, implementasi Info List telah berhasil mengubah View Page menjadi display data yang profesional dan bersifat read-only. Dengan menggunakan elemen seperti TextEntry, ImageEntry, dan IconEntry, serta melakukan formatting data (color, badge, date), tampilan halaman detail produk menjadi jauh lebih rapi dan terstruktur dibandingkan menggunakan form input biasa.
+
+
+
+
