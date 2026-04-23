@@ -11,7 +11,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
-
+use Filament\Schemas\Components\Section;
 
 class PostForm
 {
@@ -20,6 +20,7 @@ class PostForm
         return $schema
             ->components([
                 //
+                // Section::make('Post Details')->schema([
                 TextInput::make('title')->required(),
                 TextInput::make('slug')->required(),
                 Select::make('category_id')
@@ -29,6 +30,7 @@ class PostForm
                 )
                 ->required(),
                 MarkdownEditor::make('body'),
+                // ]),
                 ColorPicker::make('color'),
                 FileUpload::make('image')
                     ->image()
@@ -37,6 +39,6 @@ class PostForm
                 TagsInput::make('tags'),
                 Checkbox::make('published'),
                 DatePicker::make('published_at'),
-            ]);
+            ])->columns(3);
     }
 }
