@@ -43,7 +43,7 @@ class ProductResource extends Resource
     {
         return [
             //
-
+            
         ];
     }
 
