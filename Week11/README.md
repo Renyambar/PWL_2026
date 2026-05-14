@@ -18,6 +18,7 @@ TextColumn::make('slug')
     ->searchable(),
 TextColumn::make('category.name')
     ->searchable(),
+![alt text](image.png)
 
 
 
@@ -40,6 +41,8 @@ Filter::make('created_at')
         );
     }),
 
+![alt text](image-1.png)
+
 
 
 3. Membuat Filter Kategori (SelectFilter)
@@ -52,8 +55,7 @@ SelectFilter::make('category_id')
     ->relationship('category', 'name')
     ->preload(),
 
-
-(Catatan: Pengujian kombinasi Search dan Filter telah dilakukan. Screenshot untuk Search Title, Filter Tanggal, dan Filter Kategori dilampirkan secara terpisah).
+![alt text](image-2.png)
 
 # C. Jawaban Analisis & Diskusi
 1. Mengapa search tidak cocok untuk filter tanggal?
